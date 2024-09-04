@@ -46,13 +46,14 @@ async function cryptopriceScraper() {
     });
     return result;
   }
-  
+
   app.get("/data-scrapper", async (req, res) => {
     try {
       const data = await cryptopriceScraper();
       return res.status(200).json({
         result: data,
       });
+      await getSiteData();
     } catch (err) {
       return res.status(500).json({
         err: err.toString(),
